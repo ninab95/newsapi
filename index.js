@@ -23,7 +23,7 @@ function displayTopHeadlines(articles) {
             <h2>${article.title}</h2>
             <p>${article.author}</p>
             <span>${article.publishedAt}</span>
-            <a class="button" href="${article.url}" target="_blank">Read article</a>
+            <a class="button">Read article</a>
           `;
 
           
@@ -33,8 +33,8 @@ function displayTopHeadlines(articles) {
 }
 
 function showArticleContent(article) {
-    
-    const articleContentTab = window.open("", "_blank");
+    const articleContentTab = window;
+    history.pushState(null, null, window.location.href + `article/${article.source.id}`)
 
     const contentHTML = `
     <!DOCTYPE html>
@@ -51,7 +51,6 @@ function showArticleContent(article) {
                 <p>${article.content}</p>
             </div>
         </div>
-        <script src="your-external-js-file.js"></script>
     </body>
     </html>
   `;
@@ -62,3 +61,7 @@ function showArticleContent(article) {
 }
 
 getTopHeadlinesNewsApi();
+
+window.addEventListener("load", function() {
+    console.log("loadded ", window.location.pathname)
+})
